@@ -1,18 +1,20 @@
 import {createContext,useContext,useState,useEffect} from 'react';
+import UserContext from './contexts/user-context'
 import './styles/style.css';
+import Layout from './components/Layout'
 
-const UserContext = createContext("Unknown");
+//const UserContext = createContext("Unknown");
 
-const UserInfo = () => {
+/*const UserInfo = () => {
   const {userName} = useContext(UserContext);
   return (
     <div className="userInfo">
       {userName}
     </div>
   )
-};
+};*/
 
-const Header = () => {
+/*const Header = () => {
   return (
     <header>
       <div className="container">
@@ -20,9 +22,9 @@ const Header = () => {
       </div>
     </header>
   )
-};
+};*/
 
-const Main = ({children}) => {
+/*const Main = ({children}) => {
   const {userName,userStatus} = useContext(UserContext);
   return (
     <main className="main">
@@ -37,32 +39,32 @@ const Main = ({children}) => {
               <h3>status {userStatus}</h3>
             </div>
 
-            {/*<UserContext.Consumer>
+            {/!*<UserContext.Consumer>
               {userName => (
                 <div>
                   <h2>Hello {userName}</h2>
 
                 </div>
               )}
-            </UserContext.Consumer>*/}
+            </UserContext.Consumer>*!/}
 
-            {/*<UserContext.Consumer>
+            {/!*<UserContext.Consumer>
               {user => (
                 <div>
                   <h2>Hello {user.name}</h2>
                   <span>status {user.status}</span>
                 </div>
               )}
-            </UserContext.Consumer>*/}
+            </UserContext.Consumer>*!/}
             {children}
           </div>
         </div>
       </div>
     </main>
   )
-};
+};*/
 
-const Footer = () => {
+/*const Footer = () => {
   return (
     <footer>
       <div className="container">
@@ -70,33 +72,33 @@ const Footer = () => {
       </div>
     </footer>
   )
-};
+};*/
 
-const Layout = (props, {children}) => {
+/*const Layout = (props, {children}) => {
   const {setUserName} = useContext(UserContext);
   return (
     <main className="layout">
       <div className="panel">
-        {/*<button onClick={() => props.setUserName("Dana White")}>Change User</button>*/} {/*Lifting State up*/}
+        {/!*<button onClick={() => props.setUserName("Dana White")}>Change User</button>*!/} {/!*Lifting State up*!/}
         <button onClick={() => setUserName("Dana White")}>Change User</button>
-        {/*<div className="panel__content">{props.test}</div>*/}
+        {/!*<div className="panel__content">{props.test}</div>*!/}
       </div>
       <Header/>
       <Main children={children}/>
       <Footer/>
     </main>
   )
-};
+};*/
 
 const App = () => {
-  const [userName, setUserName] = useState("John Smith");
-  const userStatus = "loged";
+  //const [userName, setUserName] = useState("John Smith");
+  //const userStatus = "loged";
 
-  useEffect(() => {
+  /*useEffect(() => {
     setTimeout(() => {
       setUserName("Joe Rogan");
     },5000)
-  },[]);
+  },[]);*/
 
   /*const user = {
     "name": "John Smith",
@@ -106,7 +108,7 @@ const App = () => {
 
   return (
     <div className="app">
-      <UserContext.Provider value={{userName, userStatus, setUserName}}>
+      <UserContext.Provider value="John Smith">
         <Layout
           //setUserName={setUserName} //Lifting State up
           //test="foo bar"
