@@ -1,4 +1,7 @@
+import {memo} from 'react';
+
 const Footer = () => {
+  console.log("msg from Footer")  //testing re-renders
   return (
     <footer>
       <div className="container">
@@ -8,4 +11,4 @@ const Footer = () => {
   )
 };
 
-export default Footer;
+export default memo(Footer); //for prevent re-renders

@@ -1,5 +1,5 @@
-import {createContext,useContext,useState,useEffect} from 'react';
-import UserContext from './contexts/user-context'
+import {createContext,useContext,useState,useEffect, useMemo, memo} from 'react';
+import {UserContext,userName as userNameImport} from './contexts/user-context'
 import './styles/style.css';
 import Layout from './components/Layout'
 
@@ -105,10 +105,22 @@ const App = () => {
     "age": 30,
     "status": "loged"
   };*/
+  
+  const [userName, setUserName] = useState(userNameImport)
+  
+  //some reason don't work
+  /*const value = useMemo(
+    () => ({userName, setUserName}),
+    [userName]
+  )*/
+  console.log("msg from App")
 
   return (
     <div className="app">
-      <UserContext.Provider value="John Smith">
+      <UserContext.Provider
+        value={{userName, setUserName}}
+        //value={value}
+      >
         <Layout
           //setUserName={setUserName} //Lifting State up
           //test="foo bar"
@@ -123,4 +135,5 @@ const App = () => {
   );
 };
 
+//export default memo(App);
 export default App;

@@ -1,6 +1,8 @@
+import {memo} from 'react'
 import UserInfo from './UserInfo'
 
 const Header = () => {
+  console.log("msg from Header")
   return (
     <header>
       <div className="container">
@@ -10,4 +12,4 @@ const Header = () => {
   )
 };
 
-export default Header;
+export default memo(Header);

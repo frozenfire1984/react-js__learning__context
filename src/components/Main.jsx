@@ -1,8 +1,15 @@
-import {useContext} from "react";
-import UserContext from './../contexts/user-context'
+import {useContext, useMemo, memo} from "react";
+import {UserContext} from '../contexts/user-context'
 
 const Main = ({children}) => {
-  const userName = useContext(UserContext);
+  const {userName} = useContext(UserContext);
+  
+  //some reason don't work
+  /*const value = useMemo(
+    () => (userName),
+    [userName]
+  )*/
+  console.log("msg from Main")
   return (
     <main className="main">
       <div className="container">
@@ -41,4 +48,5 @@ const Main = ({children}) => {
   )
 };
 
+//export default memo(Main);
 export default Main;
