@@ -4,10 +4,10 @@ import './styles/style.css';
 const UserContext = createContext("Unknown");
 
 const UserInfo = () => {
-  const userName = useContext(UserContext);
+  const user = useContext(UserContext);
   return (
     <div className="userInfo">
-      {userName}
+      {user.name}
     </div>
   )
 };
@@ -23,7 +23,7 @@ const Header = () => {
 };
 
 const Main = ({children}) => {
-  const UserName = useContext(UserContext);
+  const {user} = useContext(UserContext);
   return (
     <main className="main">
       <div className="container">
@@ -32,7 +32,16 @@ const Main = ({children}) => {
             lorem*20
           </aside>
           <div className="cols__content">
-            <h2>Hello {UserName}</h2>
+            {/*<h2>Hello {user.name}</h2>*/}
+
+            <UserContext.Consumer>
+              {user => (
+                <div>
+                  <h2>Hello {user.name}</h2>
+                  <span>status {user.status}</span>
+                </div>
+              )}
+            </UserContext.Consumer>
             {children}
           </div>
         </div>
@@ -62,15 +71,21 @@ const Layout = ({children}) => {
 };
 
 const App = () => {
-  const userName = "John Smith";
+  //const userName = "John Smith";
+  const user = {
+    "name": "John Smith",
+    "age": 30,
+    "status": "loged"
+  };
 
   return (
     <div className="app">
-      <UserContext.Provider value={userName}>
-        <Layout userName={userName}>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quisquam, vitae! Ab, aut dolor ipsum
-        laudantium magnam maiores molestiae mollitia natus neque nulla pariatur quo recusandae sapiente, totam voluptate
-        voluptatem?
+      <UserContext.Provider value={user}>
+        <Layout>
+          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quisquam, vitae! Ab, aut dolor ipsum
+          laudantium magnam maiores molestiae mollitia natus neque nulla pariatur quo recusandae sapiente, totam voluptate
+          voluptatem?
+          </p>
         </Layout>
       </UserContext.Provider>
     </div>
