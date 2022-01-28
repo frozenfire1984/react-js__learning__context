@@ -1,13 +1,13 @@
-import {createContext,useContext} from 'react';
+import {createContext,useContext,useState,useEffect} from 'react';
 import './styles/style.css';
 
 const UserContext = createContext("Unknown");
 
 const UserInfo = () => {
-  const user = useContext(UserContext);
+  const {userName} = useContext(UserContext);
   return (
     <div className="userInfo">
-      {user.name}
+      {userName}
     </div>
   )
 };
@@ -23,7 +23,7 @@ const Header = () => {
 };
 
 const Main = ({children}) => {
-  const {user} = useContext(UserContext);
+  const {userName,userStatus} = useContext(UserContext);
   return (
     <main className="main">
       <div className="container">
@@ -32,16 +32,28 @@ const Main = ({children}) => {
             lorem*20
           </aside>
           <div className="cols__content">
-            {/*<h2>Hello {user.name}</h2>*/}
+            <div>
+              <h2>Hello {userName}</h2>
+              <h3>status {userStatus}</h3>
+            </div>
 
-            <UserContext.Consumer>
+            {/*<UserContext.Consumer>
+              {userName => (
+                <div>
+                  <h2>Hello {userName}</h2>
+
+                </div>
+              )}
+            </UserContext.Consumer>*/}
+
+            {/*<UserContext.Consumer>
               {user => (
                 <div>
                   <h2>Hello {user.name}</h2>
                   <span>status {user.status}</span>
                 </div>
               )}
-            </UserContext.Consumer>
+            </UserContext.Consumer>*/}
             {children}
           </div>
         </div>
@@ -60,9 +72,15 @@ const Footer = () => {
   )
 };
 
-const Layout = ({children}) => {
+const Layout = (props, {children}) => {
+  const {setUserName} = useContext(UserContext);
   return (
     <main className="layout">
+      <div className="panel">
+        {/*<button onClick={() => props.setUserName("Dana White")}>Change User</button>*/} {/*Lifting State up*/}
+        <button onClick={() => setUserName("Dana White")}>Change User</button>
+        {/*<div className="panel__content">{props.test}</div>*/}
+      </div>
       <Header/>
       <Main children={children}/>
       <Footer/>
@@ -71,17 +89,28 @@ const Layout = ({children}) => {
 };
 
 const App = () => {
-  //const userName = "John Smith";
-  const user = {
+  const [userName, setUserName] = useState("John Smith");
+  const userStatus = "loged";
+
+  useEffect(() => {
+    setTimeout(() => {
+      setUserName("Joe Rogan");
+    },5000)
+  },[]);
+
+  /*const user = {
     "name": "John Smith",
     "age": 30,
     "status": "loged"
-  };
+  };*/
 
   return (
     <div className="app">
-      <UserContext.Provider value={user}>
-        <Layout>
+      <UserContext.Provider value={{userName, userStatus, setUserName}}>
+        <Layout
+          //setUserName={setUserName} //Lifting State up
+          //test="foo bar"
+        >
           <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Mollitia, quisquam, vitae! Ab, aut dolor ipsum
           laudantium magnam maiores molestiae mollitia natus neque nulla pariatur quo recusandae sapiente, totam voluptate
           voluptatem?

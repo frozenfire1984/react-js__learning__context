@@ -1,3 +1,7 @@
+body {
+  font-size: 16px;
+}
+
 .app {
   display: flex;
   flex-direction: column;
@@ -11,9 +15,25 @@
 }
 
 .layout {
+  position: relative;
   display: flex;
   flex-direction: column;
   flex: 1;
+}
+
+.panel {
+  position: absolute;
+  right: 0;
+  top: 0;
+  padding: 15px;
+  border: 1px hsl(0,0%,95%);
+  border-radius: 5px;
+  box-shadow: 0 0 5px hsla(0,0%,0%,.2);
+
+  & &__content {
+    margin-top: 5px;
+    font-size: .8em;
+  }
 }
 
 .main {
